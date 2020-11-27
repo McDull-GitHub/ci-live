@@ -39,5 +39,8 @@ jobs:
           echo
           
       - name: Go Live
-        run: bash live/live live.mkv ${{ secrets.CODE }}
-          
+#        run: bash live/live live.mkv ${{ secrets.CODE }}
+        run: |
+          ffmpeg -i live.mkv  -c:v libx264 -preset ultrafast -b:v 3000k -maxrate 3000k -bufsize 6000k \
+          -vf "scale=1280:-1,format=yuv420p" -g 50 -c:a aac -b:a 128k -ac 2 -ar 44100 live.flv
+          ffmpeg -re -i live.flv -c copy -f flv rtmp://a.rtmp.youtube.com/live2/${{ secrets.CODE }}
