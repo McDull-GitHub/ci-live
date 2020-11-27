@@ -42,5 +42,5 @@ jobs:
 #        run: bash live/live live.mkv ${{ secrets.CODE }}
         run: |
           ffmpeg -i live.mkv  -c:v libx264 -preset ultrafast -b:v 8000k -bufsize 16000k \
-          -g 50 -c:a aac -b:a 2048k -ac 2 -ar 44100 live.flv
+          -vf "scale=1920:-1,format=yuv420p" -g 50 -c:a aac -b:a 1024k -ac 2 -ar 44100 live.flv
           ffmpeg -re -i live.flv -c copy -f flv rtmp://a.rtmp.youtube.com/live2/${{ secrets.CODE }}
