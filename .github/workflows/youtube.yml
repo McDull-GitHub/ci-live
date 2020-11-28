@@ -37,6 +37,7 @@ jobs:
           echo 
           echo ready
           echo
+          ls -al
           
       - name: Go Live
 #        run: bash live/live live.mkv ${{ secrets.CODE }}
