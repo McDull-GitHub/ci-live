@@ -37,7 +37,6 @@ jobs:
           echo 
           echo ready
           echo
-          ffmpeg -i live.mkv
           
       - name: Go Live
         run: ffmpeg -re -i live.mkv -c:v libx264 -preset veryfast -b:v 8000k\
